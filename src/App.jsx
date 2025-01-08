@@ -1,4 +1,4 @@
-import ConnectomeVisualization from './components/ConnectomeVisualization'
+import ConnectomeVisualization from './components/ConnectomeVisualization.jsx'
 
 function App() {
   return (
