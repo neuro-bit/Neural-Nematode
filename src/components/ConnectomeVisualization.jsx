@@ -47,8 +47,8 @@ const ConnectomeVisualization = () => {
       d3.select(svgRef.current).selectAll('*').remove();
 
       // Set up the SVG
-      const width = 800;
-      const height = 600;
+      const width = 700;
+      const height = 500;
       const svg = d3.select(svgRef.current)
         .attr('viewBox', [0, 0, width, height]);
 
@@ -335,10 +335,12 @@ const ConnectomeVisualization = () => {
     return <div>Error: {error}</div>;
   }
 
-  return (
-    <div className="w-full max-w-6xl mx-auto p-4">
-      <div className="mb-4">
+return (
+  <div className="w-full max-w-5xl mx-auto p-4">
+    <div className="grid grid-cols-1 gap-4">
+      <div className="mb-2">
         <select
+          id="neurotransmitter-select"
           className="p-2 border rounded"
           value={selectedNeurotransmitter}
           onChange={(e) => setSelectedNeurotransmitter(e.target.value)}
@@ -363,14 +365,14 @@ const ConnectomeVisualization = () => {
           </div>
         )}
       </div>
-      <div className="mt-4 text-sm">
+      <div className="text-sm space-y-1">
         <p>• Solid lines represent chemical synapses</p>
         <p>• Dashed lines represent gap junctions</p>
         <p>• Line thickness indicates connection strength</p>
         <p>• Node size represents total number of connections</p>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default ConnectomeVisualization;
