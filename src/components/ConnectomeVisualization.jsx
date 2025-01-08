@@ -47,7 +47,7 @@ const ConnectomeVisualization = () => {
       d3.select(svgRef.current).selectAll('*').remove();
 
       // Set up the SVG
-      const width = 700;
+      const width = 600;
       const height = 500;
       const svg = d3.select(svgRef.current)
         .attr('viewBox', [0, 0, width, height]);
@@ -336,12 +336,14 @@ const ConnectomeVisualization = () => {
   }
 
 return (
-  <div className="w-full max-w-5xl mx-auto p-4">
-    <div className="grid grid-cols-1 gap-4">
-      <div className="mb-2">
+  <div className="w-full max-w-5xl mx-auto p-2">
+    {/* Grid Layout */}
+    <div className="grid grid-cols-12 gap-4">
+      {/* Left column with controls */}
+      <div className="col-span-2">
         <select
           id="neurotransmitter-select"
-          className="p-2 border rounded"
+          className="w-full p-2 border rounded mb-4"
           value={selectedNeurotransmitter}
           onChange={(e) => setSelectedNeurotransmitter(e.target.value)}
         >
@@ -350,26 +352,29 @@ return (
             <option key={nt} value={nt}>{nt}</option>
           ))}
         </select>
+        
+        <div className="text-xs space-y-2 mt-4">
+          <p>• Solid lines represent chemical synapses</p>
+          <p>• Dashed lines represent gap junctions</p>
+          <p>• Line thickness indicates connection strength</p>
+          <p>• Node size represents total number of connections</p>
+        </div>
       </div>
-      <div className="relative">
+
+      {/* Center column with visualization */}
+      <div className="col-span-10 relative">
         <svg
           ref={svgRef}
           className="w-full border rounded bg-white"
-          style={{ aspectRatio: '4/3' }}
+          style={{ height: '80vh' }}
         />
         {hoveredNode && (
-          <div className="absolute top-0 right-0 bg-white p-2 border rounded shadow">
+          <div className="absolute top-2 right-2 bg-white p-2 border rounded shadow">
             <p className="text-sm font-bold">{hoveredNode.id}</p>
             <p className="text-xs">Type: {hoveredNode.type}</p>
             <p className="text-xs">Connections: {hoveredNode.degree}</p>
           </div>
         )}
-      </div>
-      <div className="text-sm space-y-1">
-        <p>• Solid lines represent chemical synapses</p>
-        <p>• Dashed lines represent gap junctions</p>
-        <p>• Line thickness indicates connection strength</p>
-        <p>• Node size represents total number of connections</p>
       </div>
     </div>
   </div>
