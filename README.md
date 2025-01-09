@@ -1,6 +1,6 @@
-# Neural-Nematode: DeepWorm - C. elegans Connectome Visualization
+# Neural-Nematode: DeepWorm 🧠🪱 - C. elegans Connectome Visualization
 
-An interactive visualization of the C. elegans nervous system connectome, built with React and D3.js. This tool allows researchers and enthusiasts to explore the neural network of C. elegans, a model organism in neuroscience. *Data Source - The connectome data is based on the simplified version from nanotode, representing the neural connections in C. elegans.
+An interactive visualization of the C. elegans nervous system connectome, built with React and D3.js. This tool allows researchers and enthusiasts to explore the neural network of C. elegans, a model organism in neuroscience. *Data Source - The connectome data is based on the simplified version from nanotode, representing the neural connections in C. elegans (https://github.com/nategri/nanotode)
 
 ## Features
 
@@ -29,16 +29,15 @@ An interactive visualization of the C. elegans nervous system connectome, built 
 
 ### Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/neuro-bit/Neural-Nematode.git
-cd Neural-Nematode
+1. Clone the repository: 
+  - git clone https://github.com/neuro-bit/Neural-Nematode.git
+  - cd Neural-Nematode
 
 2. Install dependecies:
-npm install
+  - npm install
 
 3. Run the development server:
-npm run dev
+  - npm run dev
 
 4. Open your browser and navigate to http://localhost:5173
 
