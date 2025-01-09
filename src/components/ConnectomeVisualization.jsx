@@ -111,10 +111,10 @@ const ConnectomeVisualization = () => {
 
       // Color scales
       const neuronTypeColors = {
-        'Sensory': '#ff7f0e',     // Orange
-        'Interneuron': '#1f77b4', // Blue
-        'Motor': '#2ca02c',       // Green
-        'Muscle': '#d62728',      // Red
+        'Sensory': '#00FFFF',     // Cyan
+        'Interneuron': '#FF00FF', // Magenta
+        'Motor': '#00ff2b',       // Green
+        'Muscle': '#fff400',      // Yellow
         'Unknown': '#999999'      // Gray
       };
 
@@ -335,49 +335,48 @@ const ConnectomeVisualization = () => {
     return <div>Error: {error}</div>;
   }
 
-return (
-  <div className="w-full max-w-5xl mx-auto p-2">
-    {/* Grid Layout */}
-    <div className="grid grid-cols-12 gap-4">
-      {/* Left column with controls */}
-      <div className="col-span-2">
-        <select
-          id="neurotransmitter-select"
-          className="w-full p-2 border rounded mb-4"
-          value={selectedNeurotransmitter}
-          onChange={(e) => setSelectedNeurotransmitter(e.target.value)}
-        >
-          <option value="all">All Neurotransmitters</option>
-          {data && Array.from(new Set(data.map(d => d.Neurotransmitter))).sort().map(nt => (
-            <option key={nt} value={nt}>{nt}</option>
-          ))}
-        </select>
-        
-        <div className="text-xs space-y-2 mt-4">
-          <p>• Solid lines represent chemical synapses</p>
-          <p>• Dashed lines represent gap junctions</p>
-          <p>• Line thickness indicates connection strength</p>
-          <p>• Node size represents total number of connections</p>
+  return (
+    <div className="w-full max-w-6xl mx-auto p-2">
+      <div className="flex flex-row gap-4">
+        {/* Main visualization area */}
+        <div className="flex-grow relative">
+          <select
+            id="neurotransmitter-select"
+            className="absolute top-2 left-2 z-10 p-2 border rounded bg-white"
+            value={selectedNeurotransmitter}
+            onChange={(e) => setSelectedNeurotransmitter(e.target.value)}
+          >
+            <option value="all">All Neurotransmitters</option>
+            {data && Array.from(new Set(data.map(d => d.Neurotransmitter))).sort().map(nt => (
+              <option key={nt} value={nt}>{nt}</option>
+            ))}
+          </select>
+          <svg
+            ref={svgRef}
+            className="w-full border rounded bg-white"
+            style={{ height: '85vh' }}
+          />
+        </div>
+  
+        {/* Right sidebar for info and controls */}
+        <div className="w-64 flex flex-col gap-4">
+          <div className="text-sm space-y-2">
+            <p>• Solid lines represent chemical synapses</p>
+            <p>• Dashed lines represent gap junctions</p>
+            <p>• Line thickness indicates connection strength</p>
+            <p>• Node size represents total number of connections</p>
+          </div>
+          {hoveredNode && (
+            <div className="bg-white p-2 border rounded shadow">
+              <p className="text-sm font-bold">{hoveredNode.id}</p>
+              <p className="text-xs">Type: {hoveredNode.type}</p>
+              <p className="text-xs">Connections: {hoveredNode.degree}</p>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Center column with visualization */}
-      <div className="col-span-10 relative">
-        <svg
-          ref={svgRef}
-          className="w-full border rounded bg-white"
-          style={{ height: '80vh' }}
-        />
-        {hoveredNode && (
-          <div className="absolute top-2 right-2 bg-white p-2 border rounded shadow">
-            <p className="text-sm font-bold">{hoveredNode.id}</p>
-            <p className="text-xs">Type: {hoveredNode.type}</p>
-            <p className="text-xs">Connections: {hoveredNode.degree}</p>
-          </div>
-        )}
-      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default ConnectomeVisualization;
